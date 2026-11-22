@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>asianscore_quant — AsianScore Open Sports Quant Ecosystem</title>
+  <meta name="description" content="Zero-dependency Ruby quantitative sports analytics gem & live ledger client for AsianScore — Power devigging, Dixon-Coles xG matrix, fractional Kelly criterion, and Brier score calibration." />
+  <style>
+    :root { --bg:#fafaf9; --card:#ffffff; --fg:#18181b; --muted:#52525b; --border:#e4e4e7; --accent:#0f766e; }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,sans-serif; background:var(--bg); color:var(--fg); line-height:1.6; }
+    main { max-width:860px; margin:0 auto; padding:48px 20px 72px; }
+    .eyebrow { font-size:12px; font-weight:600; color:var(--accent); letter-spacing:.04em; text-transform:uppercase; }
+    h1 { font-size:32px; line-height:1.2; margin:8px 0 12px; letter-spacing:-.02em; }
+    p.lead { font-size:17px; color:var(--muted); margin:0 0 24px; }
+    .links { display:flex; flex-wrap:wrap; gap:10px; margin-bottom:28px; }
+    .links a { text-decoration:none; padding:8px 14px; border-radius:8px; font-size:14px; font-weight:500; border:1px solid var(--border); background:var(--card); color:var(--fg); }
+    .links a.primary { background:var(--accent); color:#fff; border-color:var(--accent); }
+    .card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:22px 24px; margin-bottom:20px; }
+    h2 { font-size:18px; margin:0 0 12px; }
+    pre { background:#18181b; color:#f4f4f5; padding:16px; border-radius:8px; overflow-x:auto; font-size:13px; line-height:1.5; margin:0; }
+    ul.eco { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:10px; list-style:none; padding:0; margin:0; }
+    ul.eco li a { display:block; padding:10px 12px; border:1px solid var(--border); border-radius:8px; text-decoration:none; color:var(--fg); font-size:14px; }
+    ul.eco li a:hover { border-color:var(--accent); }
+    footer { margin-top:36px; font-size:13px; color:var(--muted); border-top:1px solid var(--border); padding-top:18px; }
+    footer a { color:var(--accent); }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="eyebrow">AsianScore Open Sports Analytics · Ruby Gem</div>
+    <h1>asianscore_quant</h1>
+    <p class="lead">Zero-dependency Ruby quantitative sports analytics gem & live ledger client for AsianScore — Power devigging, Dixon-Coles xG matrix, fractional Kelly criterion, and Brier score calibration.</p>
+    <div class="links">
+      <a class="primary" href="https://asianscore.com/">AsianScore Live Platform</a>
+      <a href="https://rubygems.org/gems/asianscore_quant">Gem on RubyGems.org</a>
+      <a href="https://asianscore-quant.readthedocs.io/en/latest/rest-api/">Public REST API Docs</a>
+      <a href="https://asianscore.com/models.html">SHA-256 Prediction Ledger</a>
+      <a href="https://asianscore.com/tools.html">Interactive Quant Tools</a>
+    </div>
+    <section class="card">
+      <h2>Installation</h2>
+      <pre><code>gem install asianscore_quant</code></pre>
+    </section>
+    <section class="card">
+      <h2>Quickstart</h2>
+      <pre><code>require "asianscore_quant"
+
+fair = AsianScoreQuant.devig_power([1.95, 3.50, 4.10])
+probs = AsianScoreQuant.dixon_coles(1.65, 1.05, rho: -0.05)
+stake = AsianScoreQuant.kelly_fraction(probs[:home], 1.95, scale: 0.25)
+summary = AsianScoreQuant.fetch_summary</code></pre>
+    </section>
+    <section class="card">
+      <h2>Cross-Language Ecosystem</h2>
+      <ul class="eco">
+        <li><a href="https://asianscore.com/scores.html">Live Football &amp; NBA Scores</a></li>
+        <li><a href="https://pypi.org/project/asianscore-quant/">Python SDK on PyPI</a></li>
+        <li><a href="https://pkg.go.dev/github.com/AIYIXIU/asianscore-go">Go SDK on pkg.go.dev</a></li>
+        <li><a href="https://rubygems.org/gems/asianscore_quant">Ruby Gem on RubyGems</a></li>
+        <li><a href="https://www.npmjs.com/package/asianscore-widget">Web Component on npm</a></li>
+        <li><a href="https://doi.org/10.5281/zenodo.24441036">Open Dataset on Zenodo (DOI)</a></li>
+        <li><a href="https://huggingface.co/datasets/asianscore/football-nba-xg-prediction-ledger">Dataset on Hugging Face</a></li>
+        <li><a href="https://www.kaggle.com/datasets/asianscore/asianscore-football-and-nba-xg-prediction-ledger">Dataset on Kaggle</a></li>
+      </ul>
+    </section>
+    <footer>
+      Published under the MIT License by <a href="https://asianscore.com/">AsianScore</a>.
+      Documentation hosted on GitHub Pages and <a href="https://asianscore-quant.readthedocs.io/en/latest/">Read the Docs</a>.
+    </footer>
+  </main>
+</body>
+</html>
