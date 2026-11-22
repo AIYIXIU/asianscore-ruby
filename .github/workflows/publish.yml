@@ -16,6 +16,17 @@ jobs:
       - name: Build and push gem to RubyGems.org
         env:
           GEM_HOST_API_KEY: ${{ secrets.RUBYGEMS_API_KEY }}
+          RG_TOTP_SECRET: ${{ secrets.RUBYGEMS_TOTP_SECRET }}
         run: |
           gem build asianscore_quant.gemspec
-          gem push asianscore_quant-*.gem
+          OTP=$(ruby -ropenssl -e '
+            alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567"
+            bits = ENV["RG_TOTP_SECRET"].upcase.gsub(/[^A-Z2-7]/, "").chars.map { |c| format("%05b", alpha.index(c)) }.join
+            key = [bits].pack("B*")
+            msg = [Time.now.to_i / 30].pack("Q>")
+            hmac = OpenSSL::HMAC.digest("sha1", key, msg).bytes
+            off = hmac.last & 0x0f
+            num = ((hmac[off] & 0x7f) << 24) | (hmac[off+1] << 16) | (hmac[off+2] << 8) | hmac[off+3]
+            print format("%06d", num % 1_000_000)
+          ')
+          gem push --otp "$OTP" asianscore_quant-*.gem
