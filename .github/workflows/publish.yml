@@ -1,0 +1,21 @@
+name: Test and Publish Gem
+
+on:
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'
+      - name: Run unit tests
+        run: ruby -Ilib test/test_asianscore_quant.rb
+      - name: Build and push gem to RubyGems.org
+        env:
+          GEM_HOST_API_KEY: ${{ secrets.RUBYGEMS_API_KEY }}
+        run: |
+          gem build asianscore_quant.gemspec
+          gem push asianscore_quant-*.gem
